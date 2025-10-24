@@ -63,8 +63,7 @@
 | street_address     | string     | null: false                    |  # 番地
 | building_name      | string     |                                |  # 建物名
 | phone_number       | string     | null: false                    |
-| item               | references | null: false, foreign_key: true |
-| user               | references | null: false, foreign_key: true |
+| order              | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :order
