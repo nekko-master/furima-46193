@@ -14,7 +14,7 @@
 ### Association
 - has_many :items
 - has_many :orders
-- has_many :comments
+
 
 
 ## itemsテーブル（出品情報）
@@ -23,18 +23,18 @@
 | ------------------ | ---------- | ------------------------------ |
 | item_name          | string     | null: false                    |
 | explanation        | text       | null: false                    |
-| category           | integer    | null: false                    |
-| condition          | integer    | null: false                    |
-| shipping_fee       | integer    | null: false                    |
-| prefectures        | integer    | null: false                    |  # 都道府県
-| shipping_day       | integer    | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| shipping_fee_id    | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |  # 都道府県
+| shipping_day_id    | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one    :order
-- has_many   :comments
+
 
 
 ## ordersテーブル（購入履歴）
@@ -58,7 +58,7 @@
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | postal_code        | string     | null: false                    |  # 郵便番号
-| prefectures        | integer    | null: false                    |  # 都道府県
+| prefecture_id      | integer    | null: false                    |  # 都道府県
 | municipalities     | string     | null: false                    |  # 市町村
 | street_address     | string     | null: false                    |  # 番地
 | building_name      | string     |                                |  # 建物名
@@ -67,18 +67,7 @@
 | user               | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
 - belongs_to :order
 
 
-## commentsテーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| text               | text       | null: false                    |
-| item               | references | null: false, foreign_key: true |
-| user               | references | null: false, foreign_key: true |
-
-### Association
-- belongs_to :user
-- belongs_to :item
