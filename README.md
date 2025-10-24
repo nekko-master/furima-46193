@@ -4,67 +4,81 @@
 | ------------------ | ------ | ------------------------- |
 | nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
-| password           | string | null: false               |
-| last_name          | text   | null: false               |
-| first_name         | text   | null: false               |
-| last_name_kana     | text   | null: false               |
-| first_name_kana    | text   | null: false               |
-| birthday           | text   | null: false               |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
-- has_many :exhibited_items
-- has_many :purchased_items
+- has_many :items
+- has_many :orders
 - has_many :comments
 
 
-## exhibited_itemsテーブル
+## itemsテーブル（出品情報）
 
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| image              | string | null: false               |
-| item_name          | string | null: false               |
-| explanation        | string | null: false               |
-| detail             | string | null: false               |
-| shipping_fee       | string | null: false               |
-| shipping_origin    | string | null: false               |
-| shipping_day       | string | null: false               |
-| price              | string | null: false               |
-| user               | string | null: false               |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| item_name          | string     | null: false                    |
+| explanation        | text       | null: false                    |
+| category           | integer    | null: false                    |
+| condition          | integer    | null: false                    |
+| shipping_fee       | integer    | null: false                    |
+| prefectures        | integer    | null: false                    |  # 都道府県
+| shipping_day       | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- has_one    :purchased_item
+- has_one    :order
 - has_many   :comments
 
 
-## purchased_itemsテーブル
+## ordersテーブル（購入履歴）
 
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| credit_card        | string | null: false               |
-| expiration_date    | string | null: false               |
-| security_code      | string | null: false               |
-| postal_code        | string | null: false               |
-| municipalities     | string | null: false               |
-| street_address     | string | null: false               |
-| building_name      | string | null: false               |
-| phone_number       | string | null: false               |
-| exhibited_item     | string | null: false               |
-| user               | string | null: false               |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| item               | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- belongs_to :exhibited_item
+- belongs_to :item
+- has_one    :address
+
+
+
+
+
+## addressesテーブル（購入時に入力する情報）
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| postal_code        | string     | null: false                    |  # 郵便番号
+| prefectures        | integer    | null: false                    |  # 都道府県
+| municipalities     | string     | null: false                    |  # 市町村
+| street_address     | string     | null: false                    |  # 番地
+| building_name      | string     |                                |  # 建物名
+| phone_number       | string     | null: false                    |
+| item               | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- belongs_to :order
 
 
 ## commentsテーブル
 
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| text               | string | null: false               |
-| exhibited_item     | string | null: false               |
-| user               | string | null: false               |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| text               | text       | null: false                    |
+| item               | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- belongs_to :exhibited_item
+- belongs_to :item
