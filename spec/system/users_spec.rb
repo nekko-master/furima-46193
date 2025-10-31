@@ -61,6 +61,7 @@ RSpec.describe 'ユーザー新規登録/ログイン（正常系）', type: :sy
   end
 end
 
+
 RSpec.describe 'ユーザー新規登録/ログイン（異常系）', type: :system do
   before do
     @user = FactoryBot.build(:user)
