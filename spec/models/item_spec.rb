@@ -14,17 +14,17 @@ RSpec.describe Item, type: :model do
 
     context '出品できないる場合' do
       it '商品画像がないと出品できない' do
-        @item.image.detach
+        @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it '商品名がないと出品できない' do
-        @item.item_name = ' '
+        @item.item_name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item name can't be blank")
       end
       it '商品の説明がないと出品できない' do
-        @item.explanation = ' '
+        @item.explanation = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
@@ -54,7 +54,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Shipping day must be other than 1')
       end
       it '価格情報がないと出品できない' do
-        @item.price = ' '
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
