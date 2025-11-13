@@ -1,25 +1,28 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  validates :item_name, presence: true
-  validates :explanation, presence: true
+  with_options presence: true do
+    validates :item_name
+    validates :explanation
 
-  validates :price, presence: true
-  validates :price, numericality: true
-  validates :price, numericality: {greater_than: 300,less_than: 9_999_999}
-  validates :image, presence: true
+    validates :price, numericality: { only_integer: true, greater_than: 300, less_than: 9_999_999 }
+    validates :category
+    validates :condition
+    validates :shipping_fee
+    validates :prefecture
+    validates :shipping_day
 
-  validates :category, presence: true
-  validates :condition, presence: true
-  validates :shipping_fee, presence: true
-  validates :prefecture, presence: true
-  validates :shipping_day, presence: true
+    validates :image
+  end
 
-  validates :category_id, numericality: {other_than: 1}
-  validates :condition_id, numericality: {other_than: 1}
-  validates :shipping_fee_id, numericality: {other_than: 1}
-  validates :prefecture_id, numericality: {other_than: 1}
-  validates :shipping_day_id, numericality: {other_than: 1}
+  with_options numericality: {other_than: 1} do
+    validates :category_id
+    validates :condition_id
+    validates :shipping_fee_id
+    validates :prefecture_id
+    validates :shipping_day_id
+  end
+
 
   belongs_to :user
 
