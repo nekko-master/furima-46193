@@ -5,7 +5,7 @@ class Item < ApplicationRecord
     validates :item_name
     validates :explanation
 
-    validates :price, numericality: { only_integer: true, greater_than: 299, less_than:10_000_000 }
+    validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
     validates :category
     validates :condition
     validates :shipping_fee
