@@ -21,13 +21,10 @@ class ItemsController < ApplicationController
   end
 
   def show
-    return unless @item.order.present? && (current_user.id == @item.user.id)
-
-    redirect_to root_path
   end
 
   def edit
-    return unless @item.order.present? && (current_user.id == @item.user.id)
+    return unless @item.order.present?
 
     redirect_to root_path
   end
@@ -57,7 +54,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    return if current_user.id == @item.user.id
+    return unless current_user.id != @item.user.id
 
     redirect_to action: :index
   end

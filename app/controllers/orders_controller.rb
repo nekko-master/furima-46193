@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
       pay_item
 
       @order_address.save
-      # Address.create(address_params)
       redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -46,10 +45,6 @@ class OrdersController < ApplicationController
       user_id: current_user.id, item_id: @item.id, token: params[:token]
     )
   end
-
-  # def address_params
-  #   params.require(:order).permit(:postal_code, :prefecture_id, :municipalities, :street_address, :building_name, :phone_number).merge(order_id: @order.id)
-  # end
 
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY'] # PAY.JPテスト秘密鍵
