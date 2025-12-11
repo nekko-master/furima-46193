@@ -88,3 +88,5 @@ gem 'active_hash'
 gem 'payjp'
 
 gem 'gon'
+
+gem 'nokogiri', '~> 1.14'
