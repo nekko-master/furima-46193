@@ -90,3 +90,5 @@ gem 'payjp'
 gem 'gon'
 
 # gem 'nokogiri', '~> 1.14'
+
+gem "cgi"
