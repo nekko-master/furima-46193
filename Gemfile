@@ -72,7 +72,9 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+  # gem 'pg' Render → PostgreSQL → pg が必須
+  # EC2（今回）→ MariaDB → mysql2 が必須
+  # gem 'pg', '~> 0.21'
   gem 'unicorn', '6.1.0'
 end
 
