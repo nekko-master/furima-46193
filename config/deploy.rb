@@ -8,6 +8,11 @@ set :application, 'furima-46193'
 set :repo_url,  'git@github.com:nekko-master/furima-46193.git'
 set :branch, 'main'
 
+set :bundle_path, -> { shared_path.join('bundle') }
+set :bundle_without, %w{development test}.join(' ')
+set :bundle_flags, '--deployment'
+set :bundle_env_variables, {}
+
 # バージョンが変わっても共通で参照するディレクトリを指定
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
