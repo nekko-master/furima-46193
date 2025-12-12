@@ -94,6 +94,6 @@ gem 'payjp'
 
 gem 'gon'
 
-# gem 'nokogiri', '~> 1.14'
+gem "nokogiri", force_ruby_platform: true
 
 gem "cgi"
